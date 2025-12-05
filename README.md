@@ -39,7 +39,7 @@ commands/
 │   ├── git-pr.md
 │   ├── pr-review.md
 │   ├── review-docs.md
-│   └── ticket.md
+│   └── ticket-create.md
 │
 └── veterans-affairs/     # VA.gov specific commands
     ├── ci-check.md
@@ -59,7 +59,7 @@ These commands work for any project:
 | `/pr-review` | PR code review guidance with security and quality focus |
 | `/git-pr` | Git workflow guidance for creating branches and preparing PRs |
 | `/review-docs` | Review documentation for grammar, technical accuracy, and best practices |
-| `/ticket` | GitHub issue template helper |
+| `/ticket-create` | Create well-structured GitHub issues with user stories and acceptance criteria |
 
 ### VA.gov Specific Commands
 
