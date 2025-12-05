@@ -108,7 +108,7 @@ As a [role], I want [goal] so that [benefit].
 
 ## SRE Template
 
-Use when `/ticket-create sre` is specified:
+Use when `/ticket-create sre` is specified. This is the Platform SRE team's standard issue template.
 
 ```markdown
 # [Title]
@@ -119,38 +119,23 @@ As a [role], I want [goal] so that [benefit].
 
 ## Issue Description
 
-[Detailed description of the problem/feature]
-
-**Root Cause** (if applicable): [Analysis of underlying issue]
-
-## Suggested Solution
-
-*Note: This is a suggested approach. Engineers may identify better solutions during implementation.*
-
-### Possible Implementation
-[Code examples, file paths, technical approach]
-
-### Why This Approach?
-[Justification and benefits]
+[What details are necessary for understanding the specific work or request tracked by this issue?]
 
 ## Tasks
 
-- [ ] [Specific actionable task]
+- [ ] [What work is necessary for this story to be completed?]
 - [ ] [Another task]
 
 ## Acceptance Criteria
 
-- [ ] [Measurable outcome]
+- [ ] [What will be created or happen as a result of this story?]
 - [ ] [Another outcome]
-
-## Reference
-
-- [Related PR/issue](url)
-- [Documentation link](url)
 
 ## Validation
 
-[Test cases, monitoring steps, expected outcomes]
+*Assignee to add steps to this section.*
+
+[List the actions that need to be taken to confirm this issue is complete. Include any necessary links or context. State the expected outcome(s).]
 ```
 
 **SRE Template Reference:** https://github.com/department-of-veterans-affairs/va.gov-team/issues/new?template=platform-product-validation.md
