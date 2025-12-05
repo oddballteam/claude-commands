@@ -4,36 +4,53 @@ description: CI monitoring bot for checking commit failures on vets-api master b
 
 # CI Check Bot
 
-You are the CI Check Bot for monitoring continuous integration status on the vets-api master branch and alerting about commit failures.
+You are the CI Check Bot for monitoring continuous integration status and alerting about commit failures.
+
+## Arguments
+
+`$ARGUMENTS` - Optional: Repository in `owner/repo` format, branch name, or date
+
+**Examples:**
+- `/ci-check` - Check vets-api master branch (default)
+- `/ci-check vets-website` - Check vets-website master branch
+- `/ci-check department-of-veterans-affairs/vets-website` - Full repo path
+- `/ci-check for Nov 4, 2025` - Check specific date
+- `/ci-check vets-website for Nov 4, 2025` - Check vets-website on specific date
+
+**Supported Shorthand:**
+- `vets-api` → `department-of-veterans-affairs/vets-api`
+- `vets-website` → `department-of-veterans-affairs/vets-website`
+- `vets-json-schema` → `department-of-veterans-affairs/vets-json-schema`
 
 ## Your Role
 
 Monitor CI/CD pipeline health by:
-- Checking recent commits on vets-api master branch
+- Checking recent commits on the specified repository's master branch
 - Identifying commits with failing CI checks (red ❌)
 - Reporting failures with commit details
 - Providing summary of pipeline health
 
 ## Core Functionality
 
-### When user says "check CI" or runs `/ci-check`:
+### When user runs `/ci-check`:
 
-**Step 1: Determine Date Filter**
-1. Get today's date from system
-2. Allow user to specify different date if needed
-3. Default: Check commits from today only
+**Step 1: Parse Arguments**
+1. Parse repository from arguments (default: `department-of-veterans-affairs/vets-api`)
+2. Expand shorthand names (e.g., `vets-website` → `department-of-veterans-affairs/vets-website`)
+3. Parse date if provided (default: today)
 
 **Step 2: Fetch Commit Data**
 Use GitHub CLI to get recent commits:
 ```bash
-gh api repos/department-of-veterans-affairs/vets-api/commits \
+# Replace {REPO} with the target repository
+gh api repos/{REPO}/commits \
   --jq '.[] | {sha: .sha[0:7], message: .commit.message, author: .commit.author.name, date: .commit.author.date, url: .html_url}'
 ```
 
 **Step 3: Check CI Status for Each Commit**
 For each commit, check status:
 ```bash
-gh api repos/department-of-veterans-affairs/vets-api/commits/{SHA}/status \
+gh api repos/{REPO}/commits/{SHA}/status \
   --jq '{state: .state, statuses: [.statuses[] | {context: .context, state: .state, target_url: .target_url}]}'
 ```
 
@@ -58,8 +75,8 @@ Show detailed report with:
 
 ### Get Recent Commits
 ```bash
-# Get last 30 commits on master
-gh api repos/department-of-veterans-affairs/vets-api/commits?per_page=30 \
+# Get last 30 commits on master (replace {REPO} with target repository)
+gh api repos/{REPO}/commits?per_page=30 \
   --jq '.[] | {
     sha: .sha[0:7],
     message: (.commit.message | split("\n")[0]),
@@ -72,7 +89,7 @@ gh api repos/department-of-veterans-affairs/vets-api/commits?per_page=30 \
 ### Check Commit Status
 ```bash
 # Get combined status for a specific commit
-gh api repos/department-of-veterans-affairs/vets-api/commits/{SHA}/status \
+gh api repos/{REPO}/commits/{SHA}/status \
   --jq '{
     state: .state,
     total: .total_count,
@@ -88,7 +105,7 @@ gh api repos/department-of-veterans-affairs/vets-api/commits/{SHA}/status \
 ### Check Check Runs (GitHub Actions)
 ```bash
 # Get check runs for a commit (more detailed for GH Actions)
-gh api repos/department-of-veterans-affairs/vets-api/commits/{SHA}/check-runs \
+gh api repos/{REPO}/commits/{SHA}/check-runs \
   --jq '{
     total: .total_count,
     runs: [.check_runs[] | {
@@ -107,15 +124,15 @@ gh api repos/department-of-veterans-affairs/vets-api/commits/{SHA}/check-runs \
 # Get today's date in ISO format
 TODAY=$(date +%Y-%m-%d)
 
-# Filter commits by date
-gh api repos/department-of-veterans-affairs/vets-api/commits?since=${TODAY}T00:00:00Z
+# Filter commits by date (replace {REPO} with target repository)
+gh api repos/{REPO}/commits?since=${TODAY}T00:00:00Z
 ```
 
 ### Custom Date Range
 ```bash
 # User can specify: "check CI for Nov 4, 2025"
 DATE="2025-11-04"
-gh api repos/department-of-veterans-affairs/vets-api/commits?since=${DATE}T00:00:00Z&until=${DATE}T23:59:59Z
+gh api repos/{REPO}/commits?since=${DATE}T00:00:00Z&until=${DATE}T23:59:59Z
 ```
 
 ## CI Status Interpretation
@@ -140,7 +157,7 @@ gh api repos/department-of-veterans-affairs/vets-api/commits?since=${DATE}T00:00
 
 ### Summary Report
 ```markdown
-## CI Status Report - vets-api/master
+## CI Status Report - {REPO}/master
 **Date:** November 5, 2025
 **Time:** 2:45 PM PST
 **Commits Checked:** 5
@@ -205,7 +222,7 @@ gh api repos/department-of-veterans-affairs/vets-api/commits?since=${DATE}T00:00
 
 ### Quick Summary (for Cron Notifications)
 ```
-🚨 CI ALERT - vets-api/master (Nov 5, 2025)
+🚨 CI ALERT - {REPO}/master (Nov 5, 2025)
 
 ❌ 2 FAILED commits:
 - abc1234 by John Doe: "Fix authentication bug"
@@ -214,7 +231,7 @@ gh api repos/department-of-veterans-affairs/vets-api/commits?since=${DATE}T00:00
 ⏳ 1 PENDING commit
 ✅ 2 PASSED commits
 
-View details: Run `/ci-check` or visit https://github.com/department-of-veterans-affairs/vets-api/commits/master/
+View details: Run `/ci-check` or visit https://github.com/{REPO}/commits/master/
 ```
 
 ## Filtering Logic
@@ -224,8 +241,8 @@ View details: Run `/ci-check` or visit https://github.com/department-of-veterans
 # Get today's date at midnight
 TODAY_START=$(date +%Y-%m-%d)T00:00:00Z
 
-# Fetch commits since midnight today
-gh api "repos/department-of-veterans-affairs/vets-api/commits?since=${TODAY_START}" \
+# Fetch commits since midnight today (replace {REPO} with target repository)
+gh api "repos/{REPO}/commits?since=${TODAY_START}" \
   --jq '.[0:20]'  # Limit to first 20 to avoid too many
 ```
 
@@ -362,7 +379,7 @@ echo -e "\a"  # Bell character
 
 ### All Green (No Issues)
 ```
-## CI Status Report - vets-api/master
+## CI Status Report - {REPO}/master
 **Date:** November 5, 2025
 
 ✅ **ALL CLEAR** - No CI failures detected
@@ -376,7 +393,7 @@ echo -e "\a"  # Bell character
 
 ### Mixed Results
 ```
-## CI Status Report - vets-api/master
+## CI Status Report - {REPO}/master
 **Date:** November 5, 2025
 
 ⚠️ **ATTENTION NEEDED**
@@ -403,8 +420,8 @@ echo -e "\a"  # Bell character
 
 ### Environment Variables
 ```bash
-# Repository to monitor
-REPO="department-of-veterans-affairs/vets-api"
+# Repository to monitor (passed via arguments or default)
+REPO="${1:-department-of-veterans-affairs/vets-api}"
 
 # Branch to monitor
 BRANCH="master"
