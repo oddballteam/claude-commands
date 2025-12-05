@@ -1,6 +1,6 @@
 # Claude Commands
 
-A collection of Claude Code slash commands for engineering workflows, with a focus on government and enterprise projects.
+A collection of Claude Code slash commands for engineering workflows. Useful for developers, product managers, and teams of all sizes.
 
 ## Purpose
 
@@ -9,7 +9,7 @@ These commands provide **AI-assisted guidance** for common engineering tasks. Th
 - **Guide, not execute** - AI provides recommendations and analysis; engineers make decisions and take actions
 - **Enhance productivity** - Streamline research, reviews, and documentation tasks
 - **Maintain security** - No credentials, secrets, or PII handling; all sensitive operations require human action
-- **Follow best practices** - Align with industry standards and government compliance requirements
+- **Follow best practices** - Align with industry standards and compliance requirements
 
 ## Important Guidelines
 
