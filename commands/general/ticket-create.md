@@ -30,6 +30,16 @@ Help the user create a clear, actionable GitHub issue ticket that any team membe
 
 If a template is specified, use that template structure. If a repository is specified, tailor the ticket format to that repo's issue templates if known.
 
+## Important: Solutions Are Suggestions
+
+When including solution ideas or implementation approaches in tickets:
+- **Clearly label them as suggestions** (e.g., "Suggested Approach", "Possible Solution")
+- **Note that engineers make the final decision** on implementation
+- **Avoid prescriptive language** - use "could", "might", "one option" instead of "should", "must", "will"
+- **Welcome alternative approaches** - add a note like "Engineers may identify better approaches during implementation"
+
+The goal is to provide helpful context, not dictate implementation details.
+
 ## Process
 
 1. **Ask for ticket details** (if not provided):
@@ -113,9 +123,11 @@ As a [role], I want [goal] so that [benefit].
 
 **Root Cause** (if applicable): [Analysis of underlying issue]
 
-## Solution
+## Suggested Solution
 
-### Implementation
+*Note: This is a suggested approach. Engineers may identify better solutions during implementation.*
+
+### Possible Implementation
 [Code examples, file paths, technical approach]
 
 ### Why This Approach?
@@ -183,7 +195,9 @@ Use when `/ticket-create bug` is specified:
 - **Severity:** [Critical/High/Medium/Low]
 - **Users Affected:** [Scope of impact]
 
-## Possible Fix
+## Possible Fix (Optional)
+
+*Note: These are suggestions only. Engineers will determine the best approach.*
 
 [If you have ideas on how to fix, include them here]
 
