@@ -15,12 +15,17 @@ You are a ticket writing assistant that helps create well-structured GitHub issu
 **Examples:**
 - `/ticket-create` - Create a ticket using default template
 - `/ticket-create sre` - Use Platform SRE validation template
+- `/ticket-create epic` - Create a generic epic
+- `/ticket-create bug` - Bug report template
+- `/ticket-create feature` - Feature request template
 - `/ticket-create va.gov-team` - Create for va.gov-team repo
 - `/ticket-create sre va.gov-team` - SRE template for va.gov-team repo
 
 **Available Templates:**
 - `default` - General ticket template (user story, tasks, acceptance criteria)
-- `sre` - Platform SRE validation template (includes root cause, solution, validation sections)
+- `sre` - Platform SRE validation template (root cause, solution, validation)
+- `epic` - Generic epic template (hypothesis, OKR, definition of done)
+- `sre-epic` - Platform SRE epic template (status tracking, veteran impact)
 - `bug` - Bug report template (reproduction steps, expected vs actual)
 - `feature` - Feature request template (user value, scope, success metrics)
 
@@ -48,27 +53,30 @@ The goal is to provide helpful context, not dictate implementation details.
    - What are the acceptance criteria? (How do we know it's done?)
    - Are there any related PRs, issues, or documentation?
 
-2. **Use a clear ticket structure**:
-   - Title (concise, descriptive)
-   - User Story
-   - Issue Description
-   - Tasks (broken down into specific, actionable items)
-   - Acceptance Criteria
-   - References (links to related work, documentation)
+2. **Use the appropriate template structure**:
+   - Default: Title, User Story, Issue Description, Tasks, Acceptance Criteria, References
+   - SRE: Adds Root Cause, Solution, Validation sections
+   - Epic: Adds Hypothesis, OKR, Definition of Done
+   - SRE Epic: Adds Status table, Veteran Impact, weekly tracking
+   - Bug: Environment, Steps to Reproduce, Expected vs Actual
+   - Feature: Problem Statement, User Value, Scope, Success Metrics
 
 3. **Save the ticket** to `~/tickets/` as a markdown file:
    - Filename format: `YYYY-MM-DD-{title-slug}.md`
    - Example: `2025-12-05-add-user-export-feature.md`
    - Use kebab-case for the title slug
+   - For existing issue updates: `YYYY-MM-DD-issue-{number}-{slug}.md`
 
 4. **Follow best practices**:
    - Be specific and actionable in tasks
    - Include technical details where relevant
    - Add clear acceptance criteria that can be checked off
    - Reference related work (PRs, issues, docs)
-   - Use proper markdown formatting
+   - Use proper markdown formatting with code blocks and tables
 
-## Template
+## Templates
+
+### Default Template
 
 ```markdown
 # [Title]
@@ -106,7 +114,7 @@ As a [role], I want [goal] so that [benefit].
 [Any additional context, edge cases, or considerations]
 ```
 
-## SRE Template
+### SRE Template (Platform SRE Validation)
 
 Use when `/ticket-create sre` is specified. This is the Platform SRE team's standard issue template.
 
@@ -121,6 +129,20 @@ As a [role], I want [goal] so that [benefit].
 
 [What details are necessary for understanding the specific work or request tracked by this issue?]
 
+**Root Cause** (if applicable): [Analysis of underlying issue]
+
+## Solution
+
+### Suggested Approach
+
+*Note: Engineers will determine the best implementation approach.*
+
+[Code examples, file paths, technical approach]
+
+### Why This Approach?
+
+[Justification and benefits]
+
 ## Tasks
 
 - [ ] [What work is necessary for this story to be completed?]
@@ -131,6 +153,11 @@ As a [role], I want [goal] so that [benefit].
 - [ ] [What will be created or happen as a result of this story?]
 - [ ] [Another outcome]
 
+## References
+
+- [Related PR/issue]
+- [Documentation link]
+
 ## Validation
 
 *Assignee to add steps to this section.*
@@ -140,7 +167,103 @@ As a [role], I want [goal] so that [benefit].
 
 **SRE Template Reference:** https://github.com/department-of-veterans-affairs/va.gov-team/issues/new?template=platform-product-validation.md
 
-## Bug Template
+### Epic Template
+
+Use when `/ticket-create epic` is specified:
+
+```markdown
+# [Epic Title]
+
+## Product Outline
+
+[Link to product outline](https://github.com/department-of-veterans-affairs/va.gov-team/blob/master/platform/product-management/product-outline-template.md)
+
+## High Level User Story/ies
+
+As a [role], I need [goal] so I can [benefit].
+
+## Hypothesis or Bet
+
+**If** we make this change **then** we expect this to happen.
+
+## OKR
+
+Which Objective / Key Result does this epic push forward?
+
+## Definition of Done
+
+What must be true in order for you to consider this epic complete?
+
+*Take into consideration Accessibility/QA needs as well as Product, Technical, and Design requirements.*
+
+- [ ] [Completion criteria]
+- [ ] [Another criteria]
+
+## High Level Tasks
+
+- [ ] [Major milestone]
+- [ ] [Another milestone]
+
+## How to Configure This Issue
+
+- [ ] **Labeled with Team** (`platform-sre-team`, `backend`, etc.)
+- [ ] **Labeled with Practice Area** (`backend`, `frontend`, `devops`, `design`, etc.)
+```
+
+### SRE Epic Template
+
+Use when `/ticket-create sre-epic` is specified. For Platform SRE team epics:
+
+```markdown
+# [Epic Title]
+
+## Status
+
+_Update each week until completed_
+
+| Date | Status | Launch Date | Notes |
+| ----- | ------ | ----------- | ----- |
+|       |        |             |       |
+
+## Problem Statement
+
+[What problem are we solving?]
+
+## High Level User Story
+
+As a [role], I want to [action], so that we can [outcome].
+
+## Hypothesis or Bet
+
+[What do we believe will happen?]
+
+## Veteran Impact
+
+[How will this impact Veterans?]
+
+## OKR
+
+2025 OKRs - [Link to specific OKR]
+
+## Definition of Done
+
+- [ ] [Completion criteria]
+- [ ] [Another criteria]
+
+## High Level Tasks
+
+- [ ] [Major milestone]
+- [ ] [Another milestone]
+
+## Related Docs
+
+- [Link to product outline]
+- [Link to research]
+```
+
+**SRE Epic Template Reference:** https://github.com/department-of-veterans-affairs/va.gov-team/issues/new?template=platform-sre-epic.md
+
+### Bug Template
 
 Use when `/ticket-create bug` is specified:
 
@@ -192,7 +315,7 @@ Use when `/ticket-create bug` is specified:
 - [Error tracking link](url)
 ```
 
-## Feature Template
+### Feature Template
 
 Use when `/ticket-create feature` is specified:
 
@@ -208,6 +331,8 @@ As a [role], I want [goal] so that [benefit].
 [What problem does this feature solve?]
 
 ## Proposed Solution
+
+*Note: This is a suggested approach. Engineers may identify better implementations.*
 
 [High-level description of the feature]
 

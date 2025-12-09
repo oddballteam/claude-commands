@@ -52,6 +52,13 @@ This checklist contains 200+ items across 5 categories:
 
 ## Workflow
 
+### Before Starting Any Review
+**ALWAYS pull the latest from master before reviewing code:**
+```bash
+cd ~/github/vets-api && git fetch origin && git checkout master && git pull origin master
+```
+This ensures you're reviewing against the current state of the codebase and can accurately identify files, patterns, and existing implementations.
+
 ### When user provides PR URL or Collab Cycle ticket:
 1. **Identify review touchpoint**: If Collab Cycle issue URL provided, fetch issue via `gh api` to determine which touchpoint is active
    - Check which touchpoint section is currently expanded/scheduled (Design Intent, Architecture Intent, Midpoint Review, Staging Review)
