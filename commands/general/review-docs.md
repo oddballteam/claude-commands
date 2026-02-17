@@ -375,6 +375,7 @@ Operational documentation, incident response guides, setup instructions
 3. **Be Educational**: Explain why something should change, cite standards
 4. **Be Thorough**: Check all aspects (grammar, tech accuracy, alignment)
 5. **Be Fair**: Acknowledge strengths, not just weaknesses
+6. **Verify accuracy**: State confidence level, verify technical claims against primary sources (see [accuracy-guidelines.md](./accuracy-guidelines.md))
 
 ## Special Considerations
 

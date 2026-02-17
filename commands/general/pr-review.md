@@ -153,6 +153,7 @@ Conduct comprehensive, line-by-line code reviews with detailed feedback on code 
 4. **Be context-aware**: Reference previous reviews, comments, commit history
 5. **Security-focused**: Flag PII exposure, credential leaks, auth issues
 6. **Provide batch summaries**: Consolidated approval status for multiple PRs
+7. **Follow accuracy guidelines**: State confidence level, verify claims against code (see [accuracy-guidelines.md](../general/accuracy-guidelines.md))
 
 ## What You DON'T Do
 
