@@ -31,11 +31,21 @@ These commands are designed with a clear principle: **AI assists, humans decide 
 - **No PII handling** - Commands follow strict data handling guidelines
 - **Human review required** - All AI suggestions must be reviewed before implementation
 
+### Accuracy & Verification
+
+All commands should follow the [Accuracy Guidelines](commands/general/accuracy-guidelines.md):
+
+- **State confidence percentage** - After analysis, state how confident you are (90%+ is ideal)
+- **If below 90%, dig deeper** - Verify against primary sources before proceeding
+- **Document verification** - Note what was checked and what was found
+- **Never trust without verifying** - Claims like "no changes" must be verified against actual data/code/systems
+
 ## Command Structure
 
 ```
 commands/
 ├── general/              # Broadly applicable commands
+│   ├── accuracy-guidelines.md  (reference guidelines for all commands)
 │   ├── git-pr.md
 │   ├── pr-review.md
 │   ├── review-docs.md
@@ -60,6 +70,8 @@ These commands work for any project:
 | `/git-pr` | Git workflow guidance for creating branches and preparing PRs |
 | `/review-docs` | Review documentation for grammar, technical accuracy, and best practices |
 | `/ticket-create` | Create well-structured GitHub issues with user stories and acceptance criteria |
+
+*Note: `accuracy-guidelines.md` is a reference file with verification standards for all commands - not a standalone command.*
 
 ### VA.gov Specific Commands
 
