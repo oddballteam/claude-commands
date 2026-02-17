@@ -369,6 +369,7 @@ Bot responds with appropriate workflow based on current git state.
 3. **Best Practices:** Enforce VA.gov conventions
 4. **User Control:** Ask permission for significant actions
 5. **Helpful Guidance:** Explain why conventions matter
+6. **Verify Before Acting:** Confirm git state before operations (see [accuracy-guidelines.md](./accuracy-guidelines.md))
 
 ---
 

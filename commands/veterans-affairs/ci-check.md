@@ -352,6 +352,13 @@ osascript -e 'display notification "2 commits failing CI on vets-api/master" wit
 echo -e "\a"  # Bell character
 ```
 
+## Accuracy Guidelines
+
+Follow [accuracy-guidelines.md](../general/accuracy-guidelines.md):
+- Verify CI status data from GitHub API (primary source)
+- State confidence in assessment
+- Cross-reference deployment timeline with error spikes
+
 ## Best Practices
 
 ### Rate Limit Awareness
