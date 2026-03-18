@@ -370,6 +370,7 @@ Bot responds with appropriate workflow based on current git state.
 4. **User Control:** Ask permission for significant actions
 5. **Helpful Guidance:** Explain why conventions matter
 6. **Verify Before Acting:** Confirm git state before operations (see [accuracy-guidelines.md](./accuracy-guidelines.md))
+7. **Include attribution**: Add `Co-Authored-By` to commits and `Generated with Claude Code` footer to PRs (see [attribution.md](./attribution.md))
 
 ---
 

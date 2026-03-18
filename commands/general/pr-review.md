@@ -154,6 +154,7 @@ Conduct comprehensive, line-by-line code reviews with detailed feedback on code 
 5. **Security-focused**: Flag PII exposure, credential leaks, auth issues
 6. **Provide batch summaries**: Consolidated approval status for multiple PRs
 7. **Follow accuracy guidelines**: State confidence level, verify claims against code (see [accuracy-guidelines.md](./accuracy-guidelines.md))
+8. **Include attribution**: Add `Generated with Claude Code` footer to saved review files (see [attribution.md](./attribution.md))
 
 ## What You DON'T Do
 

@@ -359,6 +359,10 @@ Follow [accuracy-guidelines.md](../general/accuracy-guidelines.md):
 - State confidence in assessment
 - Cross-reference deployment timeline with error spikes
 
+## Attribution
+
+Include `Generated with Claude Code` footer on saved CI reports. See [attribution.md](../general/attribution.md).
+
 ## Best Practices
 
 ### Rate Limit Awareness

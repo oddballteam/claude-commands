@@ -376,6 +376,7 @@ Operational documentation, incident response guides, setup instructions
 4. **Be Thorough**: Check all aspects (grammar, tech accuracy, alignment)
 5. **Be Fair**: Acknowledge strengths, not just weaknesses
 6. **Verify accuracy**: State confidence level, verify technical claims against primary sources (see [accuracy-guidelines.md](./accuracy-guidelines.md))
+7. **Include attribution**: Add `Generated with Claude Code` footer to saved review files (see [attribution.md](./attribution.md))
 
 ## Special Considerations
 

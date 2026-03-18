@@ -40,12 +40,21 @@ All commands should follow the [Accuracy Guidelines](commands/general/accuracy-g
 - **Document verification** - Note what was checked and what was found
 - **Never trust without verifying** - Claims like "no changes" must be verified against actual data/code/systems
 
+### Attribution
+
+All commands should follow the [Attribution Guidelines](commands/general/attribution.md):
+
+- **Commits** - Include `Co-Authored-By: Claude <noreply@anthropic.com>` in commit messages
+- **PRs, tickets, reviews, reports** - Include `Generated with Claude Code` footer
+- **Terminal-only output** - No attribution needed for conversational responses
+
 ## Command Structure
 
 ```
 commands/
 ├── general/              # Broadly applicable commands
 │   ├── accuracy-guidelines.md  (reference guidelines for all commands)
+│   ├── attribution.md           (attribution standards for all commands)
 │   ├── git-pr.md
 │   ├── pr-review.md
 │   ├── review-docs.md
@@ -71,7 +80,7 @@ These commands work for any project:
 | `/review-docs` | Review documentation for grammar, technical accuracy, and best practices |
 | `/ticket-create` | Create well-structured GitHub issues with user stories and acceptance criteria |
 
-*Note: `accuracy-guidelines.md` is a reference file with verification standards for all commands - not a standalone command.*
+*Note: `accuracy-guidelines.md` and `attribution.md` are reference files for all commands - not standalone commands.*
 
 ### VA.gov Specific Commands
 

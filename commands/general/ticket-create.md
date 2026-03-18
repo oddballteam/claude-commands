@@ -378,6 +378,9 @@ As a [role], I want [goal] so that [benefit].
 ### Accuracy Note
 When including technical details or referencing existing code/systems, verify claims against primary sources. See [accuracy-guidelines.md](./accuracy-guidelines.md).
 
+### Attribution
+Include `Generated with Claude Code` footer on all generated tickets. See [attribution.md](./attribution.md).
+
 ### For Product Managers
 - Focus on the **why** and **what**, not the **how**
 - Write acceptance criteria that are testable

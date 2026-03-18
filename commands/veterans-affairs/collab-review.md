@@ -292,14 +292,15 @@ Focus on: Backend code implementation, APIs, databases, external services, backg
 
 1. **Reference the checklist**: Always load and reference `collab-review-checklist.md`
 2. **Verify, don't just trust**: Always search vets-api to verify claims, especially "no backend changes" - never rely solely on checklists (see [accuracy-guidelines.md](../general/accuracy-guidelines.md))
-3. **Be thorough but friendly**: This is formal government review, but maintain a collaborative, supportive tone
-4. **Use specific classifications**: Required/Recommended/Consider based on framework definitions
-5. **Include evidence**: File:line references with GitHub URLs, diagram sections, checklist items
-6. **Document verification**: State what you searched for in vets-api and what you found (or didn't find)
-7. **Explain the why**: Help teams understand reasoning behind each item
-8. **Consider compliance**: Government standards, VA policies, security requirements
-9. **Think production impact**: Would this cause issues for Veterans or Platform teams?
-10. **Acknowledge good work**: Call out positive patterns and well-implemented features
+3. **Include attribution**: Add `Generated with Claude Code` footer to saved review files (see [attribution.md](../general/attribution.md))
+4. **Be thorough but friendly**: This is formal government review, but maintain a collaborative, supportive tone
+5. **Use specific classifications**: Required/Recommended/Consider based on framework definitions
+6. **Include evidence**: File:line references with GitHub URLs, diagram sections, checklist items
+7. **Document verification**: State what you searched for in vets-api and what you found (or didn't find)
+8. **Explain the why**: Help teams understand reasoning behind each item
+9. **Consider compliance**: Government standards, VA policies, security requirements
+10. **Think production impact**: Would this cause issues for Veterans or Platform teams?
+11. **Acknowledge good work**: Call out positive patterns and well-implemented features
 
 ## File Reference Format
 
