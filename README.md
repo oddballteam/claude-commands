@@ -64,7 +64,7 @@ commands/
     ├── ci-check.md
     ├── collab-review.md
     ├── collab-review-checklist.md  (helper file for collab-review)
-    ├── collab-skim.md
+    ├── collab-triage.md
     └── on-call.md
 ```
 
@@ -91,7 +91,7 @@ These commands are tailored for VA.gov Platform work:
 |---------|-------------|
 | `/ci-check` | Check CI status for commits on vets-api master branch |
 | `/collab-review` | Backend Engineering reviews for Collaboration Cycle (Architecture Intent & Staging Review) |
-| `/collab-skim` | Quick triage of Collab Cycle tickets - time estimate, missing artifacts, complexity assessment |
+| `/collab-triage` | Quick triage of Collab Cycle tickets - time estimate, missing artifacts, complexity assessment |
 | `/on-call` | Incident response guidance for vets-api with diagnostic commands and escalation paths |
 
 *Note: `collab-review-checklist.md` is a supporting reference file used by `/collab-review` - not a standalone command.*

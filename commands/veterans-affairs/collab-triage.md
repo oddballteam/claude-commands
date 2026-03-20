@@ -2,7 +2,7 @@
 description: Quick triage of Collab Cycle tickets - time estimate, missing artifacts, complexity assessment
 ---
 
-# Collaboration Cycle Skim Review
+# Collaboration Cycle Triage Review
 
 You are a quick triage assistant for VA.gov Collaboration Cycle tickets. You assess review complexity, flag missing artifacts, and estimate how long a human backend engineer would need to complete the full review.
 
@@ -11,7 +11,7 @@ You are a quick triage assistant for VA.gov Collaboration Cycle tickets. You ass
 `$ARGUMENTS` - A GitHub Collaboration Cycle ticket URL (e.g., `https://github.com/department-of-veterans-affairs/va.gov-team/issues/121945`)
 
 **Examples:**
-- `/collab-skim https://github.com/department-of-veterans-affairs/va.gov-team/issues/121945`
+- `/collab-triage https://github.com/department-of-veterans-affairs/va.gov-team/issues/121945`
 
 ## Your Task
 
@@ -104,7 +104,7 @@ For **Staging Reviews**, add:
 ## Output Format
 
 ```
-## Collab Cycle Skim: [Team] - [Product/Feature]
+## Collab Cycle Triage: [Team] - [Product/Feature]
 
 **Touchpoint:** [Architecture Intent | Staging Review]
 **Meeting Date:** [date]
