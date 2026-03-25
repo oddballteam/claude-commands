@@ -123,10 +123,13 @@ Automated review system for VA.gov Collaboration Cycle to ensure government stan
 - [ ] **Required:** Abuse scenarios and mitigation plans provided
 - [ ] **Consider:** OWASP Top 10 vulnerabilities assessed (XSS, SQL injection, command injection)
 
-#### **Logging & PII/PHI**
+#### **Logging & PII/PHI** (Updated June 2025)
 - [ ] **Required:** New logging data capture documented
 - [ ] **Required:** If PII/PHI/PI captured, strong encryption confirmed
 - [ ] **Required:** If PII captured, ability to scrub data confirmed
+- [ ] **Required:** No logging of full `response_body` containing sensitive data
+- [ ] **Required:** Custom log statements use `ParameterFilterHelper.filter_params()`
+- [ ] **Required:** Rails parameter filtering confirmed for custom logging (not automatic)
 - [ ] **Recommended:** Cookie usage justified and documented
 
 #### **Artifacts**
@@ -198,17 +201,18 @@ Automated review system for VA.gov Collaboration Cycle to ensure government stan
 
 ## 4. SECURITY & COMPLIANCE
 
-### PII/PHI Handling
+### PII/PHI Handling (Updated June 2025)
 - [ ] **Required:** VA PII never stored/processed on non-VA assets
 - [ ] **Required:** PII stored only in approved locations (GFE, VA Azure, VA.gov AWS, PersonalInformationLog)
 - [ ] **Required:** ICN not stored in unauthorized systems (Datadog, Sentry, Google Analytics, Domo)
 - [ ] **Required:** ICN not in unencrypted database fields
 - [ ] **Required:** `user_account_uuid` used instead of ICN for linking
 - [ ] **Required:** Parameter filtering using `Rails.application.config.filter_parameters`
-- [ ] **Required:** Manual logging uses `ParameterFilterHelper.filter_params()`
-- [ ] **Required:** No logging of full `response_body` containing sensitive data
+- [ ] **Required:** Custom log statements use `ParameterFilterHelper.filter_params()` (Rails filtering does NOT protect custom logs automatically)
+- [ ] **Required:** No logging of full `response_body` containing sensitive data (can expose ICNs, names, addresses, phone numbers)
 - [ ] **Required:** No PII in VCR cassettes
 - [ ] **Required:** `filter_sensitive_data` VCR configuration applied
+- [ ] **Required:** No sharing PII/tokens/credentials with external AI tools (ChatGPT, Copilot)
 
 ### Prohibited Actions
 - [ ] **Required:** No emailing PII-containing files to non-VA addresses
@@ -376,14 +380,16 @@ Launch-blocking issues require the `launch-blocking` label on the ticket.
 ## REFERENCE DOCUMENTATION
 
 - Backend Developer Documentation: https://depo-platform-documentation.scrollhelp.site/developer-docs/backend-developer-documentation
-- PII Guidelines: https://depo-platform-documentation.scrollhelp.site/developer-docs/personal-identifiable-information-pii-guidelines
+- PII Guidelines (Updated June 2025): https://depo-platform-documentation.scrollhelp.site/developer-docs/personal-identifiable-information-pii-guidelines
 - Database Migrations: https://depo-platform-documentation.scrollhelp.site/developer-docs/vets-api-database-migrations
-- External Service Integration: https://depo-platform-documentation.scrollhelp.site/developer-docs/adding-a-new-external-service-integration
+- External Service Integration (Updated Aug 2025): https://depo-platform-documentation.scrollhelp.site/developer-docs/adding-a-new-external-service-integration
 - VCR Testing: https://depo-platform-documentation.scrollhelp.site/developer-docs/vcr-debugging
 - Sidekiq Jobs: https://depo-platform-documentation.scrollhelp.site/developer-docs/sidekiq-jobs
 - API Deprecation: https://depo-platform-documentation.scrollhelp.site/developer-docs/deprecating-api-endpoints
 - Pull Request Best Practices: https://depo-platform-documentation.scrollhelp.site/developer-docs/pull-request-best-practices
 - Submitting PRs: https://depo-platform-documentation.scrollhelp.site/developer-docs/submitting-pull-requests-for-approval
+- **Staging Review Accessibility (NEW Pilot)**: https://depo-platform-documentation.scrollhelp.site/collaboration-cycle/prepare-for-an-accessibility-staging-review
+- Architecture Intent: https://depo-platform-documentation.scrollhelp.site/collaboration-cycle/architecture-intent
 
 ---
 
