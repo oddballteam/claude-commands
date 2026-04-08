@@ -67,7 +67,6 @@ commands/
     ├── collab-triage.md
     ├── on-call.md
     ├── sprint-monitor.md
-    ├── support-ops.md
     └── ticket-pointing.md
 ```
 
@@ -97,7 +96,6 @@ These commands are tailored for VA.gov Platform work:
 | `/collab-triage` | Quick triage of Collab Cycle tickets - time estimate, missing artifacts, complexity assessment |
 | `/on-call` | Incident response guidance for vets-api with diagnostic commands and escalation paths |
 | `/sprint-monitor` | Track ticket progress, A/C completion, stale items, and teammate review needs on a GitHub Project board |
-| `/support-ops` | Backend support rotation operational runbook — deployments, Sidekiq, Flipper, Sentry, key rotation |
 | `/ticket-pointing` | Point tickets using complexity-based story points for sprint refinement |
 
 *Note: `collab-review-checklist.md` is a supporting reference file used by `/collab-review` - not a standalone command.*
