@@ -11,8 +11,10 @@ You are a ticket pointing assistant that evaluates GitHub issues for story point
 `/ticket-pointing` - Prompts for a ticket URL or description to analyze
 `/ticket-pointing https://github.com/.../issues/123` - Analyze a specific GitHub issue
 `/ticket-pointing "description of work"` - Analyze a text description
+`/ticket-pointing sprint 25` - Point all unpointed tickets in sprint 25
+`/ticket-pointing sprint 25 & 26` - Point tickets across multiple sprints
 
-**Format:** `/ticket-pointing [URL or description]`
+**Format:** `/ticket-pointing [URL | description | sprint N [& N...]]`
 
 ## Your Task
 
@@ -20,11 +22,29 @@ Evaluate a ticket's complexity across 6 dimensions and recommend story points. G
 
 ## Process
 
-### Step 1: Get the Ticket
+### Step 1: Get the Ticket(s)
 
+**Single ticket mode:**
 - If a GitHub URL is provided, fetch it with `gh issue view` or `gh api`
 - If a text description is provided, use it directly
 - If no argument, ask the user to provide a ticket URL or description
+
+**Batch/sprint mode:**
+- If the argument contains "sprint" followed by number(s), fetch all tickets for those sprints from the team's project board
+- Use the GitHub Project API to query project 1335 (department-of-veterans-affairs org):
+  ```bash
+  gh project item-list 1335 --owner department-of-veterans-affairs --format json --limit 200
+  ```
+- Filter items by: sprint field matching the requested sprint(s), and `platform-sre-team` label
+- If the project API fails (missing `read:project` scope), fall back to searching issues:
+  ```bash
+  gh search issues --repo department-of-veterans-affairs/va.gov-team \
+    --label "platform-sre-team" --state open \
+    --json number,title,labels
+  ```
+  Then filter by sprint label or iteration field
+- Skip tickets that already have a `## Complexity` section in their body (already pointed)
+- For each ticket found, run the analysis in **batch output mode** (summary table)
 
 ### Step 2: Analyze Each Dimension
 
@@ -80,7 +100,46 @@ If the ticket is a GitHub issue, search the vets-api codebase to verify technica
 
 ## Output Format
 
-### Analysis Output (for discussion)
+### Batch Output (for sprint pointing)
+
+When pointing multiple tickets (sprint mode), output a summary table first, then individual details:
+
+```markdown
+# Sprint [N] Pointing Summary
+
+| Ticket | Pts | Rationale |
+|--------|-----|-----------|
+| #12345 — Title here | 2 | Standard CRUD, clear A/C, low risk |
+| #12346 — Another title | 3 | Some unknowns around external API, moderate cognitive load |
+| #12347 — Complex one | 5 | Multiple modules, many unknowns, depends on infra team |
+| #12348 — Too big | 8+ | **Break up** — covers both migration + validation + rollback |
+
+**Total: XX points across N tickets**
+**Skipped: N tickets (already pointed)**
+```
+
+After the summary table, provide the copy-paste Complexity section for each ticket so the user can paste them into the individual tickets. Use a collapsible `<details>` block per ticket to keep it scannable:
+
+```markdown
+<details>
+<summary>#12345 — Title here (2 pts)</summary>
+
+## Complexity
+
+**Technical Difficulty** — [brief assessment]
+**Unknowns** — [brief assessment]
+**Risk/Negative Impact** — [brief assessment]
+**Dependencies** — [brief assessment]
+**Collaboration** — [brief assessment]
+**Cognitive Load** — [brief assessment]
+
+**Complexity Statement:** [one-line summary]
+**Points:** 2
+
+</details>
+```
+
+### Single Ticket Analysis Output (for discussion)
 
 Present the full analysis for team discussion:
 
@@ -174,6 +233,8 @@ When a GitHub issue URL is provided for a vets-api ticket:
 - Searches vets-api codebase to verify scope (when URL provided)
 - Suggests breaking up 8+ point tickets
 - Provides rationale for the point recommendation
+- **Batch mode:** Points all tickets in a sprint with a summary table + individual copy-paste sections
+- Skips already-pointed tickets in batch mode
 
 ## What This Bot Does NOT Do
 
