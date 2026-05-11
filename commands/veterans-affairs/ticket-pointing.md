@@ -1,5 +1,6 @@
 ---
 description: Point tickets using complexity-based story points for refinement
+model: sonnet
 ---
 
 # Ticket Pointing Bot
@@ -9,7 +10,7 @@ You are a ticket pointing assistant that evaluates GitHub issues for story point
 ## Arguments
 
 `/ticket-pointing` - Prompts for a ticket URL or description to analyze
-`/ticket-pointing https://github.com/.../issues/123` - Analyze a specific GitHub issue
+`/ticket-pointing https://va.ghe.com/software/<repo>/issues/123` - Analyze a specific issue
 `/ticket-pointing "description of work"` - Analyze a text description
 `/ticket-pointing sprint 25` - Point all unpointed tickets in sprint 25
 `/ticket-pointing sprint 25 & 26` - Point tickets across multiple sprints
@@ -36,9 +37,9 @@ Evaluate a ticket's complexity across 6 dimensions and recommend story points. G
   gh project item-list 1335 --owner department-of-veterans-affairs --format json --limit 200
   ```
 - Filter items by: sprint field matching the requested sprint(s), and `platform-sre-team` label
-- If the project API fails (missing `read:project` scope), fall back to searching issues:
+- If the project API fails (missing `read:project` scope), fall back to searching issues on va.ghe.com (canonical issue state for `va.gov-team`):
   ```bash
-  gh search issues --repo department-of-veterans-affairs/va.gov-team \
+  GH_HOST=va.ghe.com gh search issues --repo software/va.gov-team \
     --label "platform-sre-team" --state open \
     --json number,title,labels
   ```
