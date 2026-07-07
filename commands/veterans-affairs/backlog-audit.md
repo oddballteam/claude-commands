@@ -34,7 +34,7 @@ gh auth status --hostname va.ghe.com 2>&1 | grep "Logged in to" -A2
 Default label: `backend`
 Default org/repo: `software/va.gov-team` on `va.ghe.com`
 
-### Step 2: Fetch open issues
+### Step 2: Fetch your issues
 
 ```bash
 gh issue list \
@@ -45,6 +45,20 @@ gh issue list \
   --label {label} \
   --limit 100 \
   --json number,title,body,createdAt,url,labels,comments
+```
+
+### Step 2b: Fetch team backlog for duplicate comparison
+
+Fetch all open issues labeled `platform-sre-team` AND `backend` (regardless of author). This is the comparison set for duplicate detection.
+
+```bash
+gh issue list \
+  --hostname va.ghe.com \
+  --repo software/va.gov-team \
+  --state open \
+  --label "platform-sre-team,backend" \
+  --limit 200 \
+  --json number,title,body,createdAt,url,assignees,labels
 ```
 
 ### Step 3: Analyze each issue
@@ -70,10 +84,13 @@ gh search commits \
   -- "#{issue_number}"
 ```
 
-**Duplicate check** — compare each issue title/body against other open issues in the fetched list. Look for:
+**Duplicate check** — compare each issue title/body against the **team backlog** fetched in Step 2b (not just your own list). Look for:
 - Identical or near-identical titles
-- Same component/feature mentioned in multiple tickets
+- Same component/feature/service mentioned across tickets
 - One issue's scope fully contained within another's
+- Issues that reference the same ticket numbers, PRs, or systems
+
+If a match is found in the team backlog that was authored by someone else, note who owns it (assignee or author) — this distinguishes a true duplicate from parallel work that may need coordination.
 
 ### Step 4: Classify and produce report
 
@@ -104,11 +121,11 @@ These issues may already be completed. Recommend closing.
 ---
 
 ### ♻️ LIKELY DUPLICATE ({count})
-These issues overlap with another open ticket. Recommend consolidating.
+These issues overlap with a ticket already in the team backlog (`platform-sre-team` + `backend`). Recommend consolidating or closing.
 
-| # | Title | Overlaps With |
-|---|-------|---------------|
-| #1235 | [title](url) | Duplicate of #1100 — same scope |
+| # | Title | Overlaps With | Owner |
+|---|-------|---------------|-------|
+| #1235 | [title](url) | #1100 — same scope | @teammate |
 
 ---
 
@@ -131,7 +148,7 @@ Status unclear — recommend a quick human triage pass.
 
 - ✅ Queries open GHEC-US issues by label and author
 - ✅ Checks for merged PRs referencing each issue
-- ✅ Detects duplicate or overlapping tickets within the result set
+- ✅ Compares your issues against the full team backlog (`platform-sre-team` + `backend`) for duplicates
 - ✅ Produces a grouped triage report with action items
 
 ## What This Bot Does NOT Do
