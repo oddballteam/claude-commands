@@ -61,6 +61,7 @@ commands/
 │   └── ticket-create.md
 │
 └── veterans-affairs/     # VA.gov specific commands
+    ├── backlog-audit.md
     ├── ci-check.md
     ├── collab-review.md
     ├── collab-review-checklist.md  (helper file for collab-review)
@@ -91,6 +92,7 @@ These commands are tailored for VA.gov Platform work:
 
 | Command | Description |
 |---------|-------------|
+| `/backlog-audit` | Audit open GitHub backlog tickets for likely-done, duplicate, or overlapping work |
 | `/ci-check` | Check CI status for commits on vets-api master branch |
 | `/collab-review` | Backend Engineering reviews for Collaboration Cycle (Architecture Intent & Staging Review) |
 | `/collab-triage` | Quick triage of Collab Cycle tickets - time estimate, missing artifacts, complexity assessment |
